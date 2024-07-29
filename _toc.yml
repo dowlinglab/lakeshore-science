@@ -6,6 +6,7 @@ root: intro
 chapters:
 - file: linear_regression.md
 - file: regression_google_sheets.md
+- file: regression_data_analysis.ipynb
 - file: lake_data_analysis.ipynb
 - file: predict_solar_array_performance.ipynb
 - file: solar_data_analysis.md
