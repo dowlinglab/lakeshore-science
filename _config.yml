@@ -3,7 +3,7 @@
 
 title: Data Analysis for Science at Lakeshore High School
 author: Jill McNabay and Alexander Dowling
-logo: logo.png
+logo: LL_logo_PANTONE.png
 exclude_patterns: [.DS_Store, "**.ipynb_checkpoints", "**.pytest_cache"]
 
 # Launch on Google Colab button
