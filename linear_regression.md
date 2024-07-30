@@ -17,10 +17,7 @@ A simple linear regression is a mathematical model that describes the relationsh
 In science, we use this method to understand how one thing affects another, like studying time affecting test grades. It's like drawing a line that best fits the data points to see the trend and make predictions based on that trend.
   
 
-
-
 Here are some things to know when creating or analyzing linear regressions:
-* Slope:
 * An upward slope indicates a positive association (as one variable gets larger, so does the other)
 * A downward slope indicates a negative association (as one variable gets larger, the other gets smaller)
 * Calculating the slope can tell us the rate of change between the two variables
@@ -67,7 +64,11 @@ Here are some things to know when creating or analyzing linear regressions:
 
 ### Google Sheets
 
+Check out [](./regression_google_sheets.md) for more information.
+
 ### Python
+
+Check out [](./regression_python.ipynb) for more information.
 
 ## Interpreting the Results
 
@@ -79,7 +80,7 @@ Here are some things to know when creating or analyzing linear regressions:
    * If r is close to -1, it indicates a strong negative linear relationship. This would mean that as hours studied increases, grade earned tends to decrease, and the points are closely clustered around the regression line going downwards.  
    * If r is close to 0, it indicates a weak or no linear relationship. This means that there's no clear trend in how hours studied relates to grade earned, and the points are scattered randomly around the regression line.
 
-### r^2 value
+### r$^2$ value
    * Science also uses r2 Values:
    * r2 tells us how much of the variation in one thing (like test scores) can be explained by another thing (like study time). It shows how much the independent variable is impacting the dependent variable.
    * r2 can range from 0 to 1.
@@ -88,8 +89,7 @@ Here are some things to know when creating or analyzing linear regressions:
    * r2 helps scientists see if their ideas about how things are related (like studying and test scores) match up with what the data actually show. It helps them decide if their conclusions are strong and if they can trust the patterns they see in their experiments.
    * In biology, r2 values as low as 0.50 are acceptable.
 
-### Outliers:
-   * Outliers:
+### Outliers
    * An outlier in a data set is a data point that differs significantly from other observations in the data. It can be unusually high or low compared to the rest of the data points. Outliers can distort statistical analyses and models if not handled properly.
    * The first thing to do with an outlier is try to determine why it is different from the rest of the points.
    * If outliers are caused by data recording errors or failure to follow experimental protocol, they can be corrected or deleted.
