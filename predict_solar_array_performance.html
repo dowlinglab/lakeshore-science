@@ -1,0 +1,1513 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Analyze Solar Array Performance &#8212; Data Analysis for Science at Lakeshore High School</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'predict_solar_array_performance';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Solar Data Analysis" href="solar_data_analysis.html" />
+    <link rel="prev" title="Analysis of Lake Water Quality Measurements" href="lake_data_analysis.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/LL_logo_PANTONE.png" class="logo__image only-light" alt="Data Analysis for Science at Lakeshore High School - Home"/>
+    <script>document.write(`<img src="_static/LL_logo_PANTONE.png" class="logo__image only-dark" alt="Data Analysis for Science at Lakeshore High School - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to Environmental Science
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="linear_regression.html">Simple Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression_google_sheets.html">Simple Linear Regression Calculations Using Google Sheets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression_python.html">Simple Linear Regression with Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lake_data_analysis.html">Analysis of Lake Water Quality Measurements</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analyze Solar Array Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solar_data_analysis.html">Solar Data Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/dowlinglab/lakeshore-science/blob/main/predict_solar_array_performance.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/dowlinglab/lakeshore-science" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/dowlinglab/lakeshore-science/issues/new?title=Issue%20on%20page%20%2Fpredict_solar_array_performance.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/predict_solar_array_performance.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Analyze Solar Array Performance</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-libraries">Load Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-and-visualize-meterological-data">Obtain and Visualize Meterological Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-solar-panel-performance">Model Solar Panel Performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyze-solar-data">Analyze Solar Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-historial-data-and-model-predictions">Compare Historial Data and Model Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calendar-year-2019">Calendar Year 2019</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calendar-year-2020">Calendar Year 2020</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calendar-year-2021">Calendar Year 2021</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calendar-year-2022">Calendar Year 2022</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analyze-solar-array-performance">
+<h1>Analyze Solar Array Performance<a class="headerlink" href="#analyze-solar-array-performance" title="Link to this heading">#</a></h1>
+<p>In this notebook, we will use the <a class="reference external" href="https://pvlib-python.readthedocs.io/en/stable/">pvlib</a> Python package to predict the output of the solar array on the roof of the highschool. We will then compare the output to historical data.</p>
+<p><img alt="" src="_images/solar_panels.jpg" /></p>
+<section id="load-libraries">
+<h2>Load Libraries<a class="headerlink" href="#load-libraries" title="Link to this heading">#</a></h2>
+<p>We’ll get started by loading libraries and setting default plotting parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># We also need to install the solar modeling package pvlib</span>
+<span class="c1"># If running in Google Colab, you can install it by running the following command</span>
+<span class="c1"># !pip install &#39;pvlib[optional]&#39;</span>
+<span class="o">%</span><span class="k">pip</span> install &#39;pvlib[optional]&#39;
+
+<span class="c1"># The following code sets default font sizes and styles for the plots</span>
+<span class="c1"># Modified from https://stackoverflow.com/questions/3899980/how-to-change-the-font-size-on-a-matplotlib-plot</span>
+<span class="n">SMALL_SIZE</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="n">MEDIUM_SIZE</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">BIGGER_SIZE</span> <span class="o">=</span> <span class="mi">18</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">SMALL_SIZE</span><span class="p">)</span>  <span class="c1"># controls default text sizes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="n">SMALL_SIZE</span><span class="p">)</span>  <span class="c1"># fontsize of the axes title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">MEDIUM_SIZE</span><span class="p">)</span>  <span class="c1"># fontsize of the x and y labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;xtick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">SMALL_SIZE</span><span class="p">)</span>  <span class="c1"># fontsize of the tick labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;ytick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">SMALL_SIZE</span><span class="p">)</span>  <span class="c1"># fontsize of the tick labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;legend&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">SMALL_SIZE</span><span class="p">)</span>  <span class="c1"># legend fontsize</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="n">BIGGER_SIZE</span><span class="p">)</span>  <span class="c1"># fontsize of the figure title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pvlib[optional] in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (0.11.0)
+Requirement already satisfied: numpy&gt;=1.17.3 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from pvlib[optional]) (1.26.4)
+Requirement already satisfied: pandas&gt;=1.3.0 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from pvlib[optional]) (2.2.2)
+Requirement already satisfied: pytz in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from pvlib[optional]) (2024.1)
+Requirement already satisfied: requests in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from pvlib[optional]) (2.31.0)
+Requirement already satisfied: scipy&gt;=1.6.0 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from pvlib[optional]) (1.13.0)
+Requirement already satisfied: h5py in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from pvlib[optional]) (3.11.0)
+Requirement already satisfied: cython in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from pvlib[optional]) (3.0.10)
+Requirement already satisfied: ephem in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from pvlib[optional]) (4.1.5)
+Requirement already satisfied: nrel-pysam in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from pvlib[optional]) (5.1.0)
+Requirement already satisfied: numba&gt;=0.17.0 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from pvlib[optional]) (0.60.0)
+Requirement already satisfied: solarfactors in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from pvlib[optional]) (1.5.3)
+Requirement already satisfied: statsmodels in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from pvlib[optional]) (0.14.2)
+Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from numba&gt;=0.17.0-&gt;pvlib[optional]) (0.43.0)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from pandas&gt;=1.3.0-&gt;pvlib[optional]) (2.9.0)
+Requirement already satisfied: tzdata&gt;=2022.7 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from pandas&gt;=1.3.0-&gt;pvlib[optional]) (2024.1)
+Requirement already satisfied: python-dotenv in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from nrel-pysam-&gt;pvlib[optional]) (1.0.1)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from requests-&gt;pvlib[optional]) (3.3.2)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from requests-&gt;pvlib[optional]) (3.7)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from requests-&gt;pvlib[optional]) (2.2.1)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from requests-&gt;pvlib[optional]) (2024.2.2)
+Requirement already satisfied: shapely&lt;2,&gt;=1.6.4.post2 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from solarfactors-&gt;pvlib[optional]) (1.8.5.post1)
+Requirement already satisfied: matplotlib in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from solarfactors-&gt;pvlib[optional]) (3.8.4)
+Requirement already satisfied: future in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from solarfactors-&gt;pvlib[optional]) (1.0.0)
+Requirement already satisfied: six in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from solarfactors-&gt;pvlib[optional]) (1.16.0)
+Requirement already satisfied: patsy&gt;=0.5.6 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from statsmodels-&gt;pvlib[optional]) (0.5.6)
+Requirement already satisfied: packaging&gt;=21.3 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from statsmodels-&gt;pvlib[optional]) (24.0)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from matplotlib-&gt;solarfactors-&gt;pvlib[optional]) (1.2.1)
+Requirement already satisfied: cycler&gt;=0.10 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from matplotlib-&gt;solarfactors-&gt;pvlib[optional]) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from matplotlib-&gt;solarfactors-&gt;pvlib[optional]) (4.51.0)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from matplotlib-&gt;solarfactors-&gt;pvlib[optional]) (1.4.5)
+Requirement already satisfied: pillow&gt;=8 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from matplotlib-&gt;solarfactors-&gt;pvlib[optional]) (10.3.0)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /Users/adowling/opt/anaconda3/envs/summer2024/lib/python3.10/site-packages (from matplotlib-&gt;solarfactors-&gt;pvlib[optional]) (3.1.2)
+Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="obtain-and-visualize-meterological-data">
+<h2>Obtain and Visualize Meterological Data<a class="headerlink" href="#obtain-and-visualize-meterological-data" title="Link to this heading">#</a></h2>
+<p>The first step is to obtain meterological data for the years of interest. The National Renewable Energy Labratory (NREL) provides the dataset “USA Continental &amp; Mexico - (5, 30, 60min / 2km / 2019-2022)” for free at <a class="reference external" href="https://nsrdb.nrel.gov/data-viewer">https://nsrdb.nrel.gov/data-viewer</a> for years 2018 to 2022.</p>
+<p>We already downloaded the dataset for the location closest to the GPS coordinates of Lakeshore Highschool.</p>
+<p>Let’s get started by importing the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># These data files are all shared (viewable) in Google Drive</span>
+<span class="c1"># Create a dictionary to store all of the unique FILE_IDs for Google Drive</span>
+<span class="n">data_file_ids</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">data_file_ids</span><span class="p">[</span><span class="mi">2022</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1ZATFflB62KstcAAf66m6k-BNnw3vpm7U&#39;</span>
+<span class="n">data_file_ids</span><span class="p">[</span><span class="mi">2021</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1GgbtcyCQy3OxNbX2WYFZhObYVVk5RA4F&#39;</span>
+<span class="n">data_file_ids</span><span class="p">[</span><span class="mi">2020</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1EmAh-z59w0sl5yPLoogWuUHyzQGbvBx6&#39;</span>
+<span class="n">data_file_ids</span><span class="p">[</span><span class="mi">2019</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1QdglH5gN6oPnXuUzCTG8UcTnWf_elFbX&#39;</span>
+<span class="n">data_file_ids</span><span class="p">[</span><span class="mi">2018</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1XaAEfYpqFlU79YVYPboaFiJjq1lQXrah&#39;</span>
+
+<span class="k">def</span> <span class="nf">download_data_file</span><span class="p">(</span><span class="n">file_id</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;met&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download data file from Google Drive</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://drive.google.com/uc?export=download&amp;id=&#39;</span><span class="o">+</span><span class="n">file_id</span>
+    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;met&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;solar&#39;</span><span class="p">:</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">temp</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">temp</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">temp</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;power&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">temp</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;type must be &quot;met&quot; or &quot;solar&quot;&#39;</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">download_data_file</span><span class="p">(</span><span class="n">data_file_ids</span><span class="p">[</span><span class="mi">2022</span><span class="p">])</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Month</th>
+      <th>Day</th>
+      <th>Hour</th>
+      <th>Minute</th>
+      <th>DHI</th>
+      <th>DNI</th>
+      <th>Dew Point</th>
+      <th>Surface Albedo</th>
+      <th>Wind Speed</th>
+      <th>...</th>
+      <th>Pressure</th>
+      <th>Cloud Type</th>
+      <th>Solar Zenith Angle</th>
+      <th>GHI</th>
+      <th>Clearsky DHI</th>
+      <th>Clearsky DNI</th>
+      <th>Clearsky GHI</th>
+      <th>Fill Flag</th>
+      <th>Precipitable Water</th>
+      <th>Wind Direction</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2022</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4.1</td>
+      <td>0.16</td>
+      <td>4.0</td>
+      <td>...</td>
+      <td>981</td>
+      <td>7</td>
+      <td>158.38</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1.2</td>
+      <td>353</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2022</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4.1</td>
+      <td>0.16</td>
+      <td>4.1</td>
+      <td>...</td>
+      <td>981</td>
+      <td>7</td>
+      <td>158.85</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1.2</td>
+      <td>324</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2022</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4.1</td>
+      <td>0.16</td>
+      <td>4.1</td>
+      <td>...</td>
+      <td>982</td>
+      <td>8</td>
+      <td>159.29</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1.2</td>
+      <td>294</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2022</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>15</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4.1</td>
+      <td>0.16</td>
+      <td>4.2</td>
+      <td>...</td>
+      <td>982</td>
+      <td>7</td>
+      <td>159.68</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1.2</td>
+      <td>265</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>20</td>
+      <td>0</td>
+      <td>0</td>
+      <td>4.1</td>
+      <td>0.16</td>
+      <td>4.2</td>
+      <td>...</td>
+      <td>982</td>
+      <td>8</td>
+      <td>160.02</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1.2</td>
+      <td>235</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 22 columns</p>
+</div></div></div>
+</div>
+<p>Next, let’s visualize some meterological data for the first week of the calendar year 2022.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hours_since_beginning_of_year</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">*</span><span class="mi">5</span><span class="o">/</span><span class="mi">60</span>
+
+<span class="c1"># 7 days * 24 hours per day * 20 5-minute intervals per hour</span>
+<span class="n">first_week</span> <span class="o">=</span> <span class="mi">7</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">20</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll start with temperature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hours_since_beginning_of_year</span><span class="p">[:</span><span class="n">first_week</span><span class="p">],</span>
+         <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Temperature&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">first_week</span><span class="p">],</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Temperature&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Hours&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature (°C)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ce76d61eb0b851200d9cba7a60912d80b1b58d1ea0f2c0035a2a46231fafca1b.png" src="_images/ce76d61eb0b851200d9cba7a60912d80b1b58d1ea0f2c0035a2a46231fafca1b.png" />
+</div>
+</div>
+<p>Next, we will plot <strong>direct normal irrandiance (DNI)</strong> and <strong>direct horizontal irrandiance (DHI)</strong>.</p>
+<p>Solar irradiance is often reported as <strong>direct</strong> and <strong>diffuse</strong>. On cloudy days, there is a lot of diffuse irradiance but almost no direct irradiance because the clouds block the sun.</p>
+<p><strong>Normal</strong> means the amount of irradiance if the solar panel was pointed directly at the sun, whereas <strong>horizonal</strong> is for a solar panel that is flat on the ground. Notice the normal irradiance is always greater than the horizontal irradience.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hours_since_beginning_of_year</span><span class="p">[:</span><span class="n">first_week</span><span class="p">],</span>
+         <span class="n">data</span><span class="p">[</span><span class="s1">&#39;DNI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">first_week</span><span class="p">],</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;DNI&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hours_since_beginning_of_year</span><span class="p">[:</span><span class="n">first_week</span><span class="p">],</span>
+         <span class="n">data</span><span class="p">[</span><span class="s1">&#39;DHI&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="n">first_week</span><span class="p">],</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;DHI&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Hours&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Irradiance (W/m/m)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a811ed7f64405e5d4686bd2cc13ee528a74107358cd81b8f366e107bbfe41bd1.png" src="_images/a811ed7f64405e5d4686bd2cc13ee528a74107358cd81b8f366e107bbfe41bd1.png" />
+</div>
+</div>
+<p>Now let’s look at the data plotted for the entire year.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reset the line thickness for annual plots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hours_since_beginning_of_year</span><span class="p">,</span>
+         <span class="n">data</span><span class="p">[</span><span class="s1">&#39;DNI&#39;</span><span class="p">],</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;DNI&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hours_since_beginning_of_year</span><span class="p">,</span>
+         <span class="n">data</span><span class="p">[</span><span class="s1">&#39;DHI&#39;</span><span class="p">],</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;DHI&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Hours&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Irradiance (W/m/m)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8a22fc254519c4b27e85e211b58bbe01649d7611a4a3350729f88c204fdb7a94.png" src="_images/8a22fc254519c4b27e85e211b58bbe01649d7611a4a3350729f88c204fdb7a94.png" />
+</div>
+</div>
+</section>
+<section id="model-solar-panel-performance">
+<h2>Model Solar Panel Performance<a class="headerlink" href="#model-solar-panel-performance" title="Link to this heading">#</a></h2>
+<p>Now that we have the weather data, we can model the solar panel performance.</p>
+<p>We will start with this example: <a class="reference external" href="https://pvlib-python.readthedocs.io/en/stable/gallery/bifacial/plot_pvfactors_fixed_tilt.html">https://pvlib-python.readthedocs.io/en/stable/gallery/bifacial/plot_pvfactors_fixed_tilt.html</a></p>
+<p>And possibly use this example to calculate only the monofacial performance: <a class="reference external" href="https://pvlib-python.readthedocs.io/en/stable/gallery/bifacial/plot_bifi_model_pvwatts.html">https://pvlib-python.readthedocs.io/en/stable/gallery/bifacial/plot_bifi_model_pvwatts.html</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pvlib</span> <span class="kn">import</span> <span class="n">location</span>
+<span class="kn">from</span> <span class="nn">pvlib.bifacial.pvfactors</span> <span class="kn">import</span> <span class="n">pvfactors_timeseries</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="c1"># supressing shapely warnings that occur on import of pvfactors</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">module</span><span class="o">=</span><span class="s1">&#39;pvfactors&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">times</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2022-01-01&#39;</span><span class="p">,</span> <span class="c1"># start at the beginning of the year</span>
+                      <span class="s1">&#39;2023-01-01&#39;</span><span class="p">,</span> <span class="c1"># end at the beginning of the next year</span>
+                      <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;5min&#39;</span><span class="p">,</span> <span class="c1"># every 5 minutes</span>
+                      <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;America/New_York&#39;</span><span class="p">,</span> <span class="c1"># select time zone</span>
+                      <span class="n">inclusive</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span> <span class="c1"># only include beginning of year</span>
+<span class="n">loc</span> <span class="o">=</span> <span class="n">location</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="mf">42.5226</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=-</span><span class="mf">82.8809</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">times</span><span class="o">.</span><span class="n">tz</span><span class="p">)</span> <span class="c1"># Lake Shore High School</span>
+<span class="n">sp</span> <span class="o">=</span> <span class="n">loc</span><span class="o">.</span><span class="n">get_solarposition</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+<span class="c1"># cs = loc.get_clearsky(times) # not needed as we will use weather data instead</span>
+
+<span class="c1"># Height of the pv rows, measured at their center (m)</span>
+<span class="n">pvrow_height</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># default</span>
+
+<span class="c1"># Width of the pv rows in the considered 2D plane (m)</span>
+<span class="n">pvrow_width</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># default</span>
+
+<span class="n">pitch</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># default</span>
+
+<span class="c1"># Ground coverage ratio of the pv array</span>
+<span class="n">gcr</span> <span class="o">=</span> <span class="n">pvrow_width</span> <span class="o">/</span> <span class="n">pitch</span>
+<span class="c1"># small gcr means less shading, I think (see link below)</span>
+<span class="c1"># https://pvlib-python.readthedocs.io/en/stable/gallery/shading/plot_passias_diffuse_shading.html</span>
+
+<span class="n">axis_azimuth</span> <span class="o">=</span> <span class="mi">180</span> <span class="c1">#</span>
+<span class="c1"># albedo = 0.2 # not needed as we will use weather</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">irrad</span> <span class="o">=</span> <span class="n">pvfactors_timeseries</span><span class="p">(</span>
+    <span class="n">solar_azimuth</span><span class="o">=</span><span class="n">sp</span><span class="p">[</span><span class="s1">&#39;azimuth&#39;</span><span class="p">],</span>
+    <span class="n">solar_zenith</span><span class="o">=</span><span class="n">sp</span><span class="p">[</span><span class="s1">&#39;apparent_zenith&#39;</span><span class="p">],</span>
+    <span class="n">surface_azimuth</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span>  <span class="c1"># south-facing array</span>
+    <span class="n">surface_tilt</span><span class="o">=</span><span class="mf">12.5</span><span class="p">,</span> <span class="c1"># degrees,</span>
+    <span class="n">axis_azimuth</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>  <span class="c1"># 90 degrees off from surface_azimuth.  270 is ok too</span>
+    <span class="n">timestamps</span><span class="o">=</span><span class="n">times</span><span class="p">,</span>
+    <span class="n">dni</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;DNI&#39;</span><span class="p">],</span>
+    <span class="n">dhi</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;DHI&#39;</span><span class="p">],</span>
+    <span class="n">gcr</span><span class="o">=</span><span class="n">gcr</span><span class="p">,</span>
+    <span class="n">pvrow_height</span><span class="o">=</span><span class="n">pvrow_height</span><span class="p">,</span>
+    <span class="n">pvrow_width</span><span class="o">=</span><span class="n">pvrow_width</span><span class="p">,</span>
+    <span class="n">albedo</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Surface Albedo&#39;</span><span class="p">],</span>
+    <span class="n">n_pvrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">index_observed_pvrow</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="c1"># turn into pandas DataFrame</span>
+<span class="n">irrad</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">irrad</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># irrad[[&#39;total_inc_back&#39;, &#39;total_abs_back&#39;]].plot()</span>
+<span class="c1"># plt.ylabel(&#39;Irradiance [W m$^{-2}$]&#39;)</span>
+
+<span class="c1"># Show the first few rows of the results DataFrame</span>
+<span class="n">irrad</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_inc_front</th>
+      <th>total_inc_back</th>
+      <th>total_abs_front</th>
+      <th>total_abs_back</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2022-01-01 00:00:00-05:00</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2022-01-01 00:05:00-05:00</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2022-01-01 00:10:00-05:00</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2022-01-01 00:15:00-05:00</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2022-01-01 00:20:00-05:00</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now let’s plot the total absolute irradiance on the front of the panel.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">irrad</span><span class="p">[</span><span class="s1">&#39;total_abs_front&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Irradiance [W m$^{-2}$]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b819ddd58391ed4a95a44bfdfb518db46f39a3f8f5d70bb2f5d905b472b3bc77.png" src="_images/b819ddd58391ed4a95a44bfdfb518db46f39a3f8f5d70bb2f5d905b472b3bc77.png" />
+</div>
+</div>
+</section>
+<section id="analyze-solar-data">
+<h2>Analyze Solar Data<a class="headerlink" href="#analyze-solar-data" title="Link to this heading">#</a></h2>
+<p>We are now ready to analyze historical data from the solar panels on top of the highschool. We have already downloaded the data for years 2019 to 2023.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_file_solar</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">data_file_solar</span><span class="p">[</span><span class="mi">2023</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1_bzWjw6HiuSwa5zOrSbsbd5qLE837leX&#39;</span>
+<span class="n">data_file_solar</span><span class="p">[</span><span class="mi">2022</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1cntIRQ6nIfVqwiJp-CxyYBMfh6SAmrzD&#39;</span>
+<span class="n">data_file_solar</span><span class="p">[</span><span class="mi">2021</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1tlLJNLU2FMu-ZqqsRygFjIyQhPmxPAzy&#39;</span>
+<span class="n">data_file_solar</span><span class="p">[</span><span class="mi">2020</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;15ub5BE-MbktnFV5MGFh559-nmH1SoUBA&#39;</span>
+<span class="n">data_file_solar</span><span class="p">[</span><span class="mi">2019</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1Hc49CskJfSKXjMGDZUgE-2302HDjnqwQ&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download the data files from Google Drive</span>
+<span class="n">solar_data</span> <span class="o">=</span> <span class="n">download_data_file</span><span class="p">(</span><span class="n">data_file_solar</span><span class="p">[</span><span class="mi">2022</span><span class="p">],</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;solar&#39;</span><span class="p">)</span>
+<span class="n">solar_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>power</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2022-01-01 00:00:00</th>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2022-01-01 00:15:00</th>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2022-01-01 00:30:00</th>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2022-01-01 00:45:00</th>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2022-01-01 01:00:00</th>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>You’ll see the hours near midnight have <em>NaN</em>, which stands for <em>Not a Number</em>. This is because the solar panels are off and no data were recorded.</p>
+<p>Next, let’s plot the solar irradiance data for the year.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solar_data</span><span class="p">[</span><span class="s1">&#39;power&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Power (kW)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/b9e7950cc1e6810c12988edd138f5c3606f88517064410d6588515d735a8f989.png" src="_images/b9e7950cc1e6810c12988edd138f5c3606f88517064410d6588515d735a8f989.png" />
+</div>
+</div>
+</section>
+<section id="compare-historial-data-and-model-predictions">
+<h2>Compare Historial Data and Model Predictions<a class="headerlink" href="#compare-historial-data-and-model-predictions" title="Link to this heading">#</a></h2>
+<p>Now, let’s compare the historical data and model predictiopns on a single plot. This is called an <em>x-y-y plot</em> because there are two verical axes with different labels and units. The horizontal axis (time) is shared for both data sets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">irrad</span><span class="p">[</span><span class="s1">&#39;total_abs_front&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">solar_data</span><span class="p">[</span><span class="s1">&#39;power&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Calendar Year 2022&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Solar Irradiance [W m$^{-2}$]&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Solar Power [W]&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c2ae41f287ab3a40dc78e24a158fb5bcf32b4cdbdb5db59ffb55b5640bff32cd.png" src="_images/c2ae41f287ab3a40dc78e24a158fb5bcf32b4cdbdb5db59ffb55b5640bff32cd.png" />
+</div>
+</div>
+<p>Our meterological data is available every 5 minutes, which means we have a model prediction from pvlib for every 5 minutes. Our historical solar panel data is only available every 15 minutes.</p>
+<p>The code below averages the meterlogical data to be in 15 minute increments. Having a common time increment (every 15 minutes) will make it easier to compare the two datasets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">irrad_resample</span> <span class="o">=</span> <span class="n">irrad</span><span class="p">[</span><span class="s1">&#39;total_abs_front&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;15min&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">irrad_resample</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-01-01 00:00:00-05:00    0.0
+2022-01-01 00:15:00-05:00    0.0
+2022-01-01 00:30:00-05:00    0.0
+2022-01-01 00:45:00-05:00    0.0
+2022-01-01 01:00:00-05:00    0.0
+Freq: 15min, Name: total_abs_front, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s remake the plot, but using the 15-minute incremements for the solar panel model predictions. The plots above and below look almost identifical. This makes sense because converting from 5-minute to 15-minute data should not matter too much when looking at trends over the entire year.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">irrad_resample</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">solar_data</span><span class="p">[</span><span class="s1">&#39;power&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Calendar Year 2022&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Solar Irradiance [W m$^{-2}$]&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Solar Power [W]&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1246a734ff4342f8c7c359053294914d1abcbba23b1757f21d3ab13057bd30f5.png" src="_images/1246a734ff4342f8c7c359053294914d1abcbba23b1757f21d3ab13057bd30f5.png" />
+</div>
+</div>
+<p>Finally, let’s make a scatter plot to compare the solar irradiance (as predicted by pvlib and the meterlogical data) versus the actual measured solar power.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">irrandiance</span> <span class="o">=</span> <span class="n">irrad_resample</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">solar</span> <span class="o">=</span> <span class="n">solar_data</span><span class="p">[</span><span class="s1">&#39;power&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="c1"># Select times when the irradiance and solar power are above a certain threshold</span>
+<span class="n">min_irrandiance</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># W / m / m</span>
+<span class="n">min_solar_power</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># W</span>
+<span class="n">i</span> <span class="o">=</span> <span class="n">irrandiance</span> <span class="o">&gt;</span> <span class="n">min_irrandiance</span>
+<span class="n">j</span> <span class="o">=</span> <span class="n">solar</span> <span class="o">&gt;</span> <span class="n">min_solar_power</span>
+<span class="n">k</span> <span class="o">=</span> <span class="n">i</span> <span class="o">&amp;</span> <span class="n">j</span>
+
+
+<span class="c1"># Generate plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">irrandiance</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">solar</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Solar Irradiance [W m$^{-2}$]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Solar Power [W]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Calendar Year 2022&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e33796c2abaeaea2489d4c7156e260ec72cd0fae83478b3913b799abb6acb875.png" src="_images/e33796c2abaeaea2489d4c7156e260ec72cd0fae83478b3913b799abb6acb875.png" />
+</div>
+</div>
+<p>Next, let’s perform linear regression.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">linregress</span>
+
+<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> <span class="n">linregress</span><span class="p">(</span><span class="n">irrandiance</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">solar</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;slope = &quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="s2">&quot; 1 / m / m&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;intercept = &quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">intercept</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s2">&quot; W&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope =  3.016  1 / m / m
+intercept =  192.91  W
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">myfunc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">intercept</span>
+
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+<span class="n">y_plot</span> <span class="o">=</span> <span class="n">myfunc</span><span class="p">(</span><span class="n">x_plot</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">irrandiance</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">solar</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">y_plot</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Solar Irradiance [W m$^{-2}$]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Solar Power [W]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Calendar Year 2022&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4cffa3d449b0192db79911e0585d8077473025da5bc5851a3a184b29c7c3150f.png" src="_images/4cffa3d449b0192db79911e0585d8077473025da5bc5851a3a184b29c7c3150f.png" />
+</div>
+</div>
+</section>
+<section id="calendar-year-2019">
+<h2>Calendar Year 2019<a class="headerlink" href="#calendar-year-2019" title="Link to this heading">#</a></h2>
+<p>Finally, we want to analyze one calendar year at a time. We will write a function in Python to help us do this!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">analyze_year</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="mi">2019</span><span class="p">,</span> <span class="n">min_irrandiance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">min_solar_power</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Analyze solar panel data for a given year. This function does the following:</span>
+<span class="sd">    1. Downloads meterological data and solar panel data for the given year</span>
+<span class="sd">    2. Simulates solar panels to calculate available solar irradiance</span>
+<span class="sd">    3. Performs linear regression analysis.</span>
+
+<span class="sd">    Any times where the irradiance is less than min_irrandiance or the </span>
+<span class="sd">    solar power is less than min_solar_power are excluded from the analysis.</span>
+
+<span class="sd">    Arugments:</span>
+<span class="sd">        year: int, the year to analyze</span>
+<span class="sd">        min_irrandiance: float, the minimum irradiance to consider (W/m^2)</span>
+<span class="sd">        min_solar_power: float, the minimum solar power to consider (W)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="c1">## Download meterological data</span>
+    <span class="n">met_data</span> <span class="o">=</span> <span class="n">data</span> <span class="o">=</span> <span class="n">download_data_file</span><span class="p">(</span><span class="n">data_file_ids</span><span class="p">[</span><span class="n">year</span><span class="p">],</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;met&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finished downloading met data&quot;</span><span class="p">)</span>
+
+    <span class="c1">## Configure solar panel simulation</span>
+    <span class="n">times</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-01-01&#39;</span><span class="p">,</span> <span class="c1"># start at the beginning of the year</span>
+                      <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-01-01&#39;</span><span class="p">,</span> <span class="c1"># end at the beginning of the next year</span>
+                      <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;5min&#39;</span><span class="p">,</span> <span class="c1"># every 5 minutes</span>
+                      <span class="n">tz</span><span class="o">=</span><span class="s1">&#39;America/New_York&#39;</span><span class="p">,</span> <span class="c1"># select time zone</span>
+                      <span class="n">inclusive</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span> <span class="c1"># only include beginning of year</span>
+    <span class="n">loc</span> <span class="o">=</span> <span class="n">location</span><span class="o">.</span><span class="n">Location</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="mf">42.5226</span><span class="p">,</span> <span class="n">longitude</span><span class="o">=-</span><span class="mf">82.8809</span><span class="p">,</span> <span class="n">tz</span><span class="o">=</span><span class="n">times</span><span class="o">.</span><span class="n">tz</span><span class="p">)</span> <span class="c1"># Lake Shore High School</span>
+    <span class="n">sp</span> <span class="o">=</span> <span class="n">loc</span><span class="o">.</span><span class="n">get_solarposition</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
+    <span class="c1"># cs = loc.get_clearsky(times) # not needed as we will use weather data instead</span>
+
+    <span class="c1"># Height of the pv rows, measured at their center (m)</span>
+    <span class="n">pvrow_height</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># default</span>
+
+    <span class="c1"># Width of the pv rows in the considered 2D plane (m)</span>
+    <span class="n">pvrow_width</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># default</span>
+
+    <span class="n">pitch</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># default</span>
+
+    <span class="c1"># Ground coverage ratio of the pv array</span>
+    <span class="n">gcr</span> <span class="o">=</span> <span class="n">pvrow_width</span> <span class="o">/</span> <span class="n">pitch</span>
+    <span class="c1"># small gcr means less shading, I think (see link below)</span>
+    <span class="c1"># https://pvlib-python.readthedocs.io/en/stable/gallery/shading/plot_passias_diffuse_shading.html</span>
+
+    <span class="n">axis_azimuth</span> <span class="o">=</span> <span class="mi">180</span> <span class="c1">#</span>
+    <span class="c1"># albedo = 0.2 # not needed as we will use weather</span>
+
+    <span class="c1">## Simulate solar panels</span>
+    <span class="n">irrad</span> <span class="o">=</span> <span class="n">pvfactors_timeseries</span><span class="p">(</span>
+        <span class="n">solar_azimuth</span><span class="o">=</span><span class="n">sp</span><span class="p">[</span><span class="s1">&#39;azimuth&#39;</span><span class="p">],</span>
+        <span class="n">solar_zenith</span><span class="o">=</span><span class="n">sp</span><span class="p">[</span><span class="s1">&#39;apparent_zenith&#39;</span><span class="p">],</span>
+        <span class="n">surface_azimuth</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span>  <span class="c1"># south-facing array</span>
+        <span class="n">surface_tilt</span><span class="o">=</span><span class="mf">12.5</span><span class="p">,</span> <span class="c1"># degrees,</span>
+        <span class="n">axis_azimuth</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>  <span class="c1"># 90 degrees off from surface_azimuth.  270 is ok too</span>
+        <span class="n">timestamps</span><span class="o">=</span><span class="n">times</span><span class="p">,</span>
+        <span class="n">dni</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;DNI&#39;</span><span class="p">],</span>
+        <span class="n">dhi</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;DHI&#39;</span><span class="p">],</span>
+        <span class="n">gcr</span><span class="o">=</span><span class="n">gcr</span><span class="p">,</span>
+        <span class="n">pvrow_height</span><span class="o">=</span><span class="n">pvrow_height</span><span class="p">,</span>
+        <span class="n">pvrow_width</span><span class="o">=</span><span class="n">pvrow_width</span><span class="p">,</span>
+        <span class="n">albedo</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Surface Albedo&#39;</span><span class="p">],</span>
+        <span class="n">n_pvrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">index_observed_pvrow</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finished simulating solar cells&quot;</span><span class="p">)</span>
+
+    <span class="c1"># turn into pandas DataFrame</span>
+    <span class="n">irrad</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">irrad</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Convert to 15 minute intervals</span>
+    <span class="n">irrad_resample</span> <span class="o">=</span> <span class="n">irrad</span><span class="p">[</span><span class="s1">&#39;total_abs_front&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s1">&#39;15min&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+    <span class="c1">## Download solar data</span>
+    <span class="n">solar_data</span> <span class="o">=</span> <span class="n">download_data_file</span><span class="p">(</span><span class="n">data_file_solar</span><span class="p">[</span><span class="n">year</span><span class="p">],</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;solar&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finished downloading solar panel data&quot;</span><span class="p">)</span>
+
+    <span class="c1">## Plot data</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+    <span class="n">irrad_resample</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">solar_data</span><span class="p">[</span><span class="s1">&#39;power&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Calendar Year &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">),</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Solar Irradiance [W m$^{-2}$]&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Solar Power [W]&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1">## Perform regression</span>
+    <span class="n">irrandiance</span> <span class="o">=</span> <span class="n">irrad_resample</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="n">solar</span> <span class="o">=</span> <span class="n">solar_data</span><span class="p">[</span><span class="s1">&#39;power&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">irrandiance</span> <span class="o">&gt;</span> <span class="n">min_irrandiance</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">solar</span> <span class="o">&gt;</span> <span class="n">min_solar_power</span>
+
+    <span class="n">k</span> <span class="o">=</span> <span class="n">i</span> <span class="o">&amp;</span> <span class="n">j</span>
+
+    <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> <span class="n">linregress</span><span class="p">(</span><span class="n">irrandiance</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">solar</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+
+    <span class="c1">## Plot data</span>
+
+    <span class="k">def</span> <span class="nf">myfunc</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">intercept</span>
+
+    <span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+    <span class="n">y_plot</span> <span class="o">=</span> <span class="n">myfunc</span><span class="p">(</span><span class="n">x_plot</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">irrandiance</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">solar</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">y_plot</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Solar Irradiance [W m$^{-2}$]&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Solar Power [W]&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Calendar Year &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">),</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;slope = &quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="s2">&quot; 1 / m / m&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;intercept = &quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">intercept</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s2">&quot; W&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;r_value = &quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="n">r_value</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+    <span class="c1">#print(&quot;p_value = &quot;,round(p_value,3))</span>
+    <span class="c1">#print(&quot;std_err = &quot;,round(std_err,3))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analyze_year</span><span class="p">(</span><span class="mi">2019</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished downloading met data
+Finished simulating solar cells
+Finished downloading solar panel data
+</pre></div>
+</div>
+<img alt="_images/ef273aa1757e2dc3238926d5cddf0ef84f75773a1ea1a42f5b8ac7b396b43a3f.png" src="_images/ef273aa1757e2dc3238926d5cddf0ef84f75773a1ea1a42f5b8ac7b396b43a3f.png" />
+<img alt="_images/696edce2f14d5e3a03fcd69a2fe853f7d3d4259368395aa8fca6054b0c316330.png" src="_images/696edce2f14d5e3a03fcd69a2fe853f7d3d4259368395aa8fca6054b0c316330.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope =  3.235  1 / m / m
+intercept =  169.85  W
+r_value =  0.822
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calendar-year-2020">
+<h2>Calendar Year 2020<a class="headerlink" href="#calendar-year-2020" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analyze_year</span><span class="p">(</span><span class="mi">2020</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished downloading met data
+Finished simulating solar cells
+Finished downloading solar panel data
+</pre></div>
+</div>
+<img alt="_images/6c3ee62b4caa71ecffcd34fd8d956b6c61b6d28dfceddc5b35fe9f90d7e829b1.png" src="_images/6c3ee62b4caa71ecffcd34fd8d956b6c61b6d28dfceddc5b35fe9f90d7e829b1.png" />
+<img alt="_images/f939cb234891f61e56fe2c3c5fed3893f118c8c4806635d67ce13c9471db19d7.png" src="_images/f939cb234891f61e56fe2c3c5fed3893f118c8c4806635d67ce13c9471db19d7.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope =  3.287  1 / m / m
+intercept =  155.4  W
+r_value =  0.837
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calendar-year-2021">
+<h2>Calendar Year 2021<a class="headerlink" href="#calendar-year-2021" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analyze_year</span><span class="p">(</span><span class="mi">2021</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished downloading met data
+Finished simulating solar cells
+Finished downloading solar panel data
+</pre></div>
+</div>
+<img alt="_images/bbd10329ebccb18564ab2cc2b1406e2ad280909ff1de984df5d557bf629e8f22.png" src="_images/bbd10329ebccb18564ab2cc2b1406e2ad280909ff1de984df5d557bf629e8f22.png" />
+<img alt="_images/45dc8f9e49ea0beb3746caa50b0a4cc3d2401e1eae95d0d3a6553aa011486392.png" src="_images/45dc8f9e49ea0beb3746caa50b0a4cc3d2401e1eae95d0d3a6553aa011486392.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope =  3.028  1 / m / m
+intercept =  246.88  W
+r_value =  0.823
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calendar-year-2022">
+<h2>Calendar Year 2022<a class="headerlink" href="#calendar-year-2022" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">analyze_year</span><span class="p">(</span><span class="mi">2022</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished downloading met data
+Finished simulating solar cells
+Finished downloading solar panel data
+</pre></div>
+</div>
+<img alt="_images/1246a734ff4342f8c7c359053294914d1abcbba23b1757f21d3ab13057bd30f5.png" src="_images/1246a734ff4342f8c7c359053294914d1abcbba23b1757f21d3ab13057bd30f5.png" />
+<img alt="_images/36a25ddb93e1147b28ad6a4313ac44b5c0d172bcfcbaaab8416eda70082fcf9f.png" src="_images/36a25ddb93e1147b28ad6a4313ac44b5c0d172bcfcbaaab8416eda70082fcf9f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope =  3.005  1 / m / m
+intercept =  201.83  W
+r_value =  0.803
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="lake_data_analysis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Analysis of Lake Water Quality Measurements</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="solar_data_analysis.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Solar Data Analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-libraries">Load Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-and-visualize-meterological-data">Obtain and Visualize Meterological Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-solar-panel-performance">Model Solar Panel Performance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyze-solar-data">Analyze Solar Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-historial-data-and-model-predictions">Compare Historial Data and Model Predictions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calendar-year-2019">Calendar Year 2019</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calendar-year-2020">Calendar Year 2020</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calendar-year-2021">Calendar Year 2021</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calendar-year-2022">Calendar Year 2022</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jill McNabay and Alexander Dowling
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

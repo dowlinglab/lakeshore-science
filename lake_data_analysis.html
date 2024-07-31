@@ -1,0 +1,1325 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Analysis of Lake Water Quality Measurements &#8212; Data Analysis for Science at Lakeshore High School</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lake_data_analysis';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Analyze Solar Array Performance" href="predict_solar_array_performance.html" />
+    <link rel="prev" title="Simple Linear Regression with Python" href="regression_python.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/LL_logo_PANTONE.png" class="logo__image only-light" alt="Data Analysis for Science at Lakeshore High School - Home"/>
+    <script>document.write(`<img src="_static/LL_logo_PANTONE.png" class="logo__image only-dark" alt="Data Analysis for Science at Lakeshore High School - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to Environmental Science
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="linear_regression.html">Simple Linear Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression_google_sheets.html">Simple Linear Regression Calculations Using Google Sheets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression_python.html">Simple Linear Regression with Python</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analysis of Lake Water Quality Measurements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predict_solar_array_performance.html">Analyze Solar Array Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="solar_data_analysis.html">Solar Data Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/dowlinglab/lakeshore-science/blob/main/lake_data_analysis.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/dowlinglab/lakeshore-science" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/dowlinglab/lakeshore-science/issues/new?title=Issue%20on%20page%20%2Flake_data_analysis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/lake_data_analysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Analysis of Lake Water Quality Measurements</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parse-data">Parse Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-data">Visualize Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-relationships">Linear Relationships</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dissolved-oxygen-and-conductivity">Dissolved Oxygen and Conductivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alkalinity-and-conductivity">Alkalinity and Conductivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alkalinity-and-total-hardness">Alkalinity and Total Hardness</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Dissolved Oxygen and Conductivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Alkalinity and Conductivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Alkalinity and Total Hardness</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analysis-of-lake-water-quality-measurements">
+<h1>Analysis of Lake Water Quality Measurements<a class="headerlink" href="#analysis-of-lake-water-quality-measurements" title="Link to this heading">#</a></h1>
+<p>This notebook parses and visualizes water quality data collected by past Environmental Science classes at Lakeshore High School.</p>
+<section id="parse-data">
+<h2>Parse Data<a class="headerlink" href="#parse-data" title="Link to this heading">#</a></h2>
+<p>We start by parsing the data into Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We will use the Pandas library to read the data from the Google Sheet</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://docs.google.com/spreadsheets/d/1Y_7_AertX2dd86mXmVtc5ju-sbccSAGZYByXZrDT9sw/export?gid=0&amp;format=csv&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Next, let&#39;s print the first 20 rows of the data</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Lake</th>
+      <th>Class Hour</th>
+      <th>Temperature (°C)</th>
+      <th>Conductivity (μS)</th>
+      <th>pH</th>
+      <th>Alkalinity (ppm)</th>
+      <th>Dissolved Oxygen (ppm)</th>
+      <th>Copper (mg/L)</th>
+      <th>Iron (mg/L)</th>
+      <th>Total Hardness (ppm)</th>
+      <th>Nitrate (mg/L)</th>
+      <th>Nitrite (mg/L)</th>
+      <th>Total Chlorine (ppm)</th>
+      <th>Phosphate (ppm)</th>
+      <th>Turbidity (NTUs)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2020</td>
+      <td>Lake Michigan</td>
+      <td>2nd</td>
+      <td>19.5</td>
+      <td>0.25</td>
+      <td>6.5</td>
+      <td>80</td>
+      <td>4.0</td>
+      <td>0.10</td>
+      <td>0</td>
+      <td>120</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>0.1</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2021</td>
+      <td>Lake Michigan</td>
+      <td>2nd</td>
+      <td>16.9</td>
+      <td>0.32</td>
+      <td>7.0</td>
+      <td>120</td>
+      <td>8.5</td>
+      <td>0.10</td>
+      <td>0</td>
+      <td>180</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.2</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2021</td>
+      <td>Lake Michigan</td>
+      <td>3rd</td>
+      <td>18.0</td>
+      <td>0.32</td>
+      <td>7.0</td>
+      <td>120</td>
+      <td>8.5</td>
+      <td>0.10</td>
+      <td>0</td>
+      <td>120</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>0.2</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2022</td>
+      <td>Lake Michigan</td>
+      <td>3rd</td>
+      <td>22.8</td>
+      <td>0.00</td>
+      <td>7.5</td>
+      <td>120</td>
+      <td>8.5</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>120</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>NaN</td>
+      <td>13.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022</td>
+      <td>Lake Michigan</td>
+      <td>6th</td>
+      <td>23.9</td>
+      <td>0.33</td>
+      <td>7.5</td>
+      <td>120</td>
+      <td>8.5</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>50</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2023</td>
+      <td>Lake Michigan</td>
+      <td>2nd</td>
+      <td>21.4</td>
+      <td>0.30</td>
+      <td>7.0</td>
+      <td>240</td>
+      <td>7.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>120</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.3</td>
+      <td>0.0</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2023</td>
+      <td>Lake Michigan</td>
+      <td>6th</td>
+      <td>22.7</td>
+      <td>0.27</td>
+      <td>7.5</td>
+      <td>240</td>
+      <td>10.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>120</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>0.0</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2020</td>
+      <td>North Lake</td>
+      <td>2nd</td>
+      <td>17.9</td>
+      <td>0.50</td>
+      <td>6.5</td>
+      <td>120</td>
+      <td>6.0</td>
+      <td>0.10</td>
+      <td>0</td>
+      <td>120</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2021</td>
+      <td>North Lake</td>
+      <td>2nd</td>
+      <td>17.6</td>
+      <td>0.46</td>
+      <td>8.0</td>
+      <td>180</td>
+      <td>10.0</td>
+      <td>0.10</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>0.2</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2021</td>
+      <td>North Lake</td>
+      <td>3rd</td>
+      <td>19.0</td>
+      <td>0.45</td>
+      <td>7.5</td>
+      <td>180</td>
+      <td>10.0</td>
+      <td>0.10</td>
+      <td>0</td>
+      <td>180</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>0.2</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2022</td>
+      <td>North Lake</td>
+      <td>3rd</td>
+      <td>21.0</td>
+      <td>0.40</td>
+      <td>7.5</td>
+      <td>180</td>
+      <td>10.0</td>
+      <td>0.05</td>
+      <td>0</td>
+      <td>180</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>2022</td>
+      <td>North Lake</td>
+      <td>6th</td>
+      <td>22.2</td>
+      <td>0.61</td>
+      <td>7.5</td>
+      <td>180</td>
+      <td>10.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>120</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>21.0</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2023</td>
+      <td>North Lake</td>
+      <td>2nd</td>
+      <td>17.4</td>
+      <td>0.55</td>
+      <td>7.0</td>
+      <td>240</td>
+      <td>5.0</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>250</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>0.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>2023</td>
+      <td>North Lake</td>
+      <td>6th</td>
+      <td>20.8</td>
+      <td>0.51</td>
+      <td>7.5</td>
+      <td>120</td>
+      <td>4.5</td>
+      <td>0.00</td>
+      <td>0</td>
+      <td>120</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0.1</td>
+      <td>0.0</td>
+      <td>8.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="visualize-data">
+<h2>Visualize Data<a class="headerlink" href="#visualize-data" title="Link to this heading">#</a></h2>
+<p>Next, we will plot the data using different symbols for the two lakes. We will make one plot per quantity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We will use the Matplotlib library to plot the data</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># The following code sets default font sizes and styles for the plots</span>
+<span class="c1"># Modified from https://stackoverflow.com/questions/3899980/how-to-change-the-font-size-on-a-matplotlib-plot</span>
+<span class="n">SMALL_SIZE</span> <span class="o">=</span> <span class="mi">14</span>
+<span class="n">MEDIUM_SIZE</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">BIGGER_SIZE</span> <span class="o">=</span> <span class="mi">18</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">SMALL_SIZE</span><span class="p">)</span>  <span class="c1"># controls default text sizes</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="n">SMALL_SIZE</span><span class="p">)</span>  <span class="c1"># fontsize of the axes title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">MEDIUM_SIZE</span><span class="p">)</span>  <span class="c1"># fontsize of the x and y labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;xtick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">SMALL_SIZE</span><span class="p">)</span>  <span class="c1"># fontsize of the tick labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;ytick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="n">SMALL_SIZE</span><span class="p">)</span>  <span class="c1"># fontsize of the tick labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;legend&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">SMALL_SIZE</span><span class="p">)</span>  <span class="c1"># legend fontsize</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;figure&#39;</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="n">BIGGER_SIZE</span><span class="p">)</span>  <span class="c1"># fontsize of the figure title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the two lakes we are interested in</span>
+<span class="n">lakes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Lake Michigan&#39;</span><span class="p">,</span> <span class="s1">&#39;North Lake&#39;</span><span class="p">]</span>
+
+<span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">]</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">]</span>
+
+<span class="c1"># Get the names of the columns we want to plot</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>
+
+<span class="c1"># Loop over the columns</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">columns</span><span class="p">):</span>
+
+    <span class="c1"># Loop over the lakes</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lakes</span><span class="p">):</span>
+        <span class="c1"># Get the data for the current lake</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Lake&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">l</span><span class="p">]</span>
+
+        <span class="c1"># Plot the data as a scatter plot</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">symbols</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+    <span class="c1"># Add an extra year to the x-axis to allow students to plot their new data</span>
+    <span class="n">years</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+    <span class="n">years</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">years</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">years</span><span class="p">)</span>
+
+    <span class="c1"># Add labels and legend</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d6e635118d5969f12622e2caf38cefb6692199e44b55f30e667fe9ba63d11a41.png" src="_images/d6e635118d5969f12622e2caf38cefb6692199e44b55f30e667fe9ba63d11a41.png" />
+<img alt="_images/c1ce9c2fbaea75339a5423e1f4f037f1ec032c1b7cf3cdd48b545ce3c32f1aec.png" src="_images/c1ce9c2fbaea75339a5423e1f4f037f1ec032c1b7cf3cdd48b545ce3c32f1aec.png" />
+<img alt="_images/45be9097183a1564e7bc0ba38792d1b935edf043a0197326f6c3e38bcb70c204.png" src="_images/45be9097183a1564e7bc0ba38792d1b935edf043a0197326f6c3e38bcb70c204.png" />
+<img alt="_images/8bbfd7987b08ce935532edba570dc0dc81e988b54b387e721e8ca46d133c5189.png" src="_images/8bbfd7987b08ce935532edba570dc0dc81e988b54b387e721e8ca46d133c5189.png" />
+<img alt="_images/ede8a76b5e5c2452a8a3614c22b889e16b6cc00d5c2837b0a4981db7a25231b6.png" src="_images/ede8a76b5e5c2452a8a3614c22b889e16b6cc00d5c2837b0a4981db7a25231b6.png" />
+<img alt="_images/2111ccdc51683f8dbcde0b9d3a4b0748c4dfbd9bc21c2c6ab94367f9bb6c90f5.png" src="_images/2111ccdc51683f8dbcde0b9d3a4b0748c4dfbd9bc21c2c6ab94367f9bb6c90f5.png" />
+<img alt="_images/66be3cbba4a732a08328d100198f175ab69fc5a0895c040e71638f6828e4054e.png" src="_images/66be3cbba4a732a08328d100198f175ab69fc5a0895c040e71638f6828e4054e.png" />
+<img alt="_images/8c8882a695b9399c01710fe64657ab3e3906e1c6c5a65c268b79f20da0b19d11.png" src="_images/8c8882a695b9399c01710fe64657ab3e3906e1c6c5a65c268b79f20da0b19d11.png" />
+<img alt="_images/aee4cbd7f47b937f4ff1dd977f51e0cdc303224e7b3a0bd210fa8c650fa48840.png" src="_images/aee4cbd7f47b937f4ff1dd977f51e0cdc303224e7b3a0bd210fa8c650fa48840.png" />
+<img alt="_images/7876f219e6e2449769b7e72a49944b76be95d1d244cad26e4cf3f1e08dd66706.png" src="_images/7876f219e6e2449769b7e72a49944b76be95d1d244cad26e4cf3f1e08dd66706.png" />
+<img alt="_images/0dd36aee330ba03882d3250ff8c6d654fdd9b1741ffc67cd5dfbf28eb353df45.png" src="_images/0dd36aee330ba03882d3250ff8c6d654fdd9b1741ffc67cd5dfbf28eb353df45.png" />
+<img alt="_images/1a523818da60ae1aad48af2c403bd56bb8e1d4f565eae8e6208edb1c2bf55818.png" src="_images/1a523818da60ae1aad48af2c403bd56bb8e1d4f565eae8e6208edb1c2bf55818.png" />
+<img alt="_images/4ff856bc63df652847be6b05f6225efe60c043464c9cccc66a18e945111ed2b6.png" src="_images/4ff856bc63df652847be6b05f6225efe60c043464c9cccc66a18e945111ed2b6.png" />
+</div>
+</div>
+</section>
+<section id="linear-relationships">
+<h2>Linear Relationships<a class="headerlink" href="#linear-relationships" title="Link to this heading">#</a></h2>
+<p>Next, we will look for linear relationships in the data:</p>
+<ul class="simple">
+<li><p>Positive correlation between conductivity and disolved oxygen</p></li>
+<li><p>Possible positive correlation between conductivity and alkalinity</p></li>
+<li><p>Visualize these (possible) correlations with linear regression</p></li>
+</ul>
+<p>First we will start by plotting the data. You always want to start any data analysis with visual inspections.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">scatter_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">seperate_lakes</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Create a scatter plot for two columns in the dataset</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        x: the name of the column to plot on the x-axis</span>
+<span class="sd">        y: the name of the column to plot on the y-axis</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">finalize_plot</span><span class="p">():</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower center&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">l</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lakes</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Lake&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">l</span><span class="p">]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">symbols</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">seperate_lakes</span><span class="p">:</span>
+            <span class="n">finalize_plot</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">seperate_lakes</span><span class="p">:</span>
+        <span class="n">finalize_plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="dissolved-oxygen-and-conductivity">
+<h3>Dissolved Oxygen and Conductivity<a class="headerlink" href="#dissolved-oxygen-and-conductivity" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scatter_plot</span><span class="p">(</span><span class="s1">&#39;Dissolved Oxygen (ppm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Conductivity (μS)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/88137ea6ff68b8ccf9a85994f099b1985aba84e3b9157196a8f82e7ebbfc530a.png" src="_images/88137ea6ff68b8ccf9a85994f099b1985aba84e3b9157196a8f82e7ebbfc530a.png" />
+</div>
+</div>
+<p>We can also make seperate plots for each lake.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scatter_plot</span><span class="p">(</span><span class="s1">&#39;Dissolved Oxygen (ppm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Conductivity (μS)&#39;</span><span class="p">,</span> <span class="n">seperate_lakes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/102868ee61964818ab17326895534faef38b31725ac6a4efa51462574abb28c2.png" src="_images/102868ee61964818ab17326895534faef38b31725ac6a4efa51462574abb28c2.png" />
+<img alt="_images/72af589de0e976e33270df2ab10a79e9cb31990c4b428553db355799c0e400dd.png" src="_images/72af589de0e976e33270df2ab10a79e9cb31990c4b428553db355799c0e400dd.png" />
+</div>
+</div>
+</section>
+<section id="alkalinity-and-conductivity">
+<h3>Alkalinity and Conductivity<a class="headerlink" href="#alkalinity-and-conductivity" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scatter_plot</span><span class="p">(</span><span class="s1">&#39;Alkalinity (ppm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Conductivity (μS)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f1079fdf411d24c596cd82749241aabe03f7bf2616cedad1f064f424bf088dd3.png" src="_images/f1079fdf411d24c596cd82749241aabe03f7bf2616cedad1f064f424bf088dd3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scatter_plot</span><span class="p">(</span><span class="s1">&#39;Alkalinity (ppm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Conductivity (μS)&#39;</span><span class="p">,</span> <span class="n">seperate_lakes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d4462d1d4dda7260d9e0999ee8af29040f9ec81e8cc5ec62047835460aecf9a0.png" src="_images/d4462d1d4dda7260d9e0999ee8af29040f9ec81e8cc5ec62047835460aecf9a0.png" />
+<img alt="_images/f35635c19fd85ce3e0fedc2bfcd619fdc37e72fe13a713c6c591d00402c50a14.png" src="_images/f35635c19fd85ce3e0fedc2bfcd619fdc37e72fe13a713c6c591d00402c50a14.png" />
+</div>
+</div>
+</section>
+<section id="alkalinity-and-total-hardness">
+<h3>Alkalinity and Total Hardness<a class="headerlink" href="#alkalinity-and-total-hardness" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scatter_plot</span><span class="p">(</span><span class="s1">&#39;Alkalinity (ppm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Hardness (ppm)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6c925d0cae8c9ece37c17aaa71a0344d8521feab0adafe2b08ff12f86d483127.png" src="_images/6c925d0cae8c9ece37c17aaa71a0344d8521feab0adafe2b08ff12f86d483127.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scatter_plot</span><span class="p">(</span><span class="s1">&#39;Alkalinity (ppm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Hardness (ppm)&#39;</span><span class="p">,</span> <span class="n">seperate_lakes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3643a04ab1d6c79e9ac0880ce1a922ecc25da9c1935df37092450ceebdd82837.png" src="_images/3643a04ab1d6c79e9ac0880ce1a922ecc25da9c1935df37092450ceebdd82837.png" />
+<img alt="_images/ee6d245534225a8d870d4e2c0f23fd441917d400ae11d8d3954d446c1022c659.png" src="_images/ee6d245534225a8d870d4e2c0f23fd441917d400ae11d8d3954d446c1022c659.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="linear-regression">
+<h2>Linear Regression<a class="headerlink" href="#linear-regression" title="Link to this heading">#</a></h2>
+<p>Next, we will calculate the best fit line and correlation coefficient.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We will use scipy.stats to calculate the linear regression</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+
+<span class="k">def</span> <span class="nf">scatter_plot_with_linear_regression</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Create a scatter plot with linear regression</span>
+<span class="sd">    for two columns in the dataset</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        x: the name of the column to plot on the x-axis</span>
+<span class="sd">        y: the name of the column to plot on the y-axis</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Select the data for the x and y columns</span>
+    <span class="n">x_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">y_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">y</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+    <span class="c1"># Perform linear regression</span>
+    <span class="n">b1</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;slope =&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">b1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;intercept =&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">b0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;r =&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">r_value</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+    
+    <span class="c1"># Plot the raw data</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">l</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lakes</span><span class="p">):</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Lake&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">l</span><span class="p">]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">y</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">symbols</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+    <span class="c1"># Plot the linear regression line</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">b0</span> <span class="o">+</span> <span class="n">b1</span> <span class="o">*</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Best Fit Line&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Plot the mean values of x and y</span>
+    <span class="c1"># By definition, the regression line passes through the mean values of x and y</span>
+    <span class="n">x_mean</span> <span class="o">=</span> <span class="n">x_data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">y_mean</span> <span class="o">=</span> <span class="n">y_data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_mean</span><span class="p">,</span> <span class="n">y_mean</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean (Average) Values&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Both Lakes&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">scatter_plot_with_linear_regression_by_lake</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Create a scatter plot with linear regression</span>
+<span class="sd">    for two columns in the dataset by lake</span>
+
+<span class="sd">    Arguments:</span>
+<span class="sd">        x: the name of the column to plot on the x-axis</span>
+<span class="sd">        y: the name of the column to plot on the y-axis</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Loop over the lakes</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">l</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lakes</span><span class="p">):</span>
+        <span class="c1"># Get the data for the current lake</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Lake&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">l</span><span class="p">]</span>
+
+        <span class="c1"># Select the data for the x and y columns</span>
+        <span class="n">x_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">y_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">y</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+        <span class="c1"># Plot the data</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="n">symbols</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+
+        <span class="c1"># Perform linear regression</span>
+        <span class="n">b1</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; *** &quot;</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="s2">&quot; ***&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;slope =&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">b1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;intercept =&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">b0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;r =&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">r_value</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    
+        <span class="c1"># Plot the linear regression line</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">b0</span> <span class="o">+</span> <span class="n">b1</span> <span class="o">*</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Best Fit Line&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Plot the mean values of x and y</span>
+        <span class="c1"># By definition, the regression line passes through the mean values of x and y</span>
+        <span class="n">x_mean</span> <span class="o">=</span> <span class="n">x_data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">y_mean</span> <span class="o">=</span> <span class="n">y_data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_mean</span><span class="p">,</span> <span class="n">y_mean</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean (Average) Values&#39;</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;center left&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id1">
+<h3>Dissolved Oxygen and Conductivity<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scatter_plot_with_linear_regression</span><span class="p">(</span><span class="s1">&#39;Dissolved Oxygen (ppm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Conductivity (μS)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope = -0.005 Dissolved Oxygen (ppm) / Conductivity (μS)
+intercept = 0.41 Conductivity (μS)
+r = -0.07
+</pre></div>
+</div>
+<img alt="_images/4004eb3ded08a241610025bbcc41553a7300878e15c0eba6e354f3543e536b6d.png" src="_images/4004eb3ded08a241610025bbcc41553a7300878e15c0eba6e354f3543e536b6d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scatter_plot_with_linear_regression_by_lake</span><span class="p">(</span><span class="s1">&#39;Dissolved Oxygen (ppm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Conductivity (μS)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ***  Lake Michigan  ***
+slope = -0.001 Dissolved Oxygen (ppm) / Conductivity (μS)
+intercept = 0.26 Conductivity (μS)
+r = -0.01
+ 
+</pre></div>
+</div>
+<img alt="_images/2126ff7a7712b1c4410538fc288717125970a9cc16361afa4c1bd80046728bce.png" src="_images/2126ff7a7712b1c4410538fc288717125970a9cc16361afa4c1bd80046728bce.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ***  North Lake  ***
+slope = -0.008 Dissolved Oxygen (ppm) / Conductivity (μS)
+intercept = 0.56 Conductivity (μS)
+r = -0.32
+ 
+</pre></div>
+</div>
+<img alt="_images/e2f2006f2abbeee82f577adc47b8be5ab594a0144decad15f4c5ffb9f5bcd0a8.png" src="_images/e2f2006f2abbeee82f577adc47b8be5ab594a0144decad15f4c5ffb9f5bcd0a8.png" />
+</div>
+</div>
+</section>
+<section id="id2">
+<h3>Alkalinity and Conductivity<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scatter_plot_with_linear_regression</span><span class="p">(</span><span class="s1">&#39;Alkalinity (ppm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Conductivity (μS)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope = 0.001 Alkalinity (ppm) / Conductivity (μS)
+intercept = 0.25 Conductivity (μS)
+r = 0.27
+</pre></div>
+</div>
+<img alt="_images/c1677082d0e05dcc3e9b2ec2acbaf39a6d5a8deaadd63abd4a8f779f5d5344f4.png" src="_images/c1677082d0e05dcc3e9b2ec2acbaf39a6d5a8deaadd63abd4a8f779f5d5344f4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scatter_plot_with_linear_regression_by_lake</span><span class="p">(</span><span class="s1">&#39;Alkalinity (ppm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Conductivity (μS)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ***  Lake Michigan  ***
+slope = 0.0 Alkalinity (ppm) / Conductivity (μS)
+intercept = 0.21 Conductivity (μS)
+r = 0.16
+ 
+</pre></div>
+</div>
+<img alt="_images/def07c53520f43f7cb2a0183ac3dbd6090b20cc922f351ec30fa61476cc3c3fd.png" src="_images/def07c53520f43f7cb2a0183ac3dbd6090b20cc922f351ec30fa61476cc3c3fd.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ***  North Lake  ***
+slope = 0.0 Alkalinity (ppm) / Conductivity (μS)
+intercept = 0.46 Conductivity (μS)
+r = 0.13
+ 
+</pre></div>
+</div>
+<img alt="_images/35f0a97b1c6888c72a0ddfc854f3662e275e33305b03f6f2aff3ffb4fafbdf86.png" src="_images/35f0a97b1c6888c72a0ddfc854f3662e275e33305b03f6f2aff3ffb4fafbdf86.png" />
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>Alkalinity and Total Hardness<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scatter_plot_with_linear_regression</span><span class="p">(</span><span class="s1">&#39;Alkalinity (ppm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Hardness (ppm)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>slope = 0.429 Alkalinity (ppm) / Total Hardness (ppm)
+intercept = 77.73 Total Hardness (ppm)
+r = 0.41
+</pre></div>
+</div>
+<img alt="_images/e521436d61219336e82f617de3b3eca7aa894a20a54165fdd73eef24b7943fb5.png" src="_images/e521436d61219336e82f617de3b3eca7aa894a20a54165fdd73eef24b7943fb5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scatter_plot_with_linear_regression_by_lake</span><span class="p">(</span><span class="s1">&#39;Alkalinity (ppm)&#39;</span><span class="p">,</span> <span class="s1">&#39;Total Hardness (ppm)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ***  Lake Michigan  ***
+slope = 0.012 Alkalinity (ppm) / Total Hardness (ppm)
+intercept = 116.85 Total Hardness (ppm)
+r = 0.02
+ 
+</pre></div>
+</div>
+<img alt="_images/01f61e11d36fe880fa4ffb1ce018ed7e34d2b617dace3e963efcd09d254ec53b.png" src="_images/01f61e11d36fe880fa4ffb1ce018ed7e34d2b617dace3e963efcd09d254ec53b.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ***  North Lake  ***
+slope = 1.075 Alkalinity (ppm) / Total Hardness (ppm)
+intercept = -10.0 Total Hardness (ppm)
+r = 0.76
+ 
+</pre></div>
+</div>
+<img alt="_images/27c9397160b917348854aefb7218224cc1f9fac3f9d6a8ae3eebb625ab52fa60.png" src="_images/27c9397160b917348854aefb7218224cc1f9fac3f9d6a8ae3eebb625ab52fa60.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="regression_python.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Simple Linear Regression with Python</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="predict_solar_array_performance.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Analyze Solar Array Performance</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parse-data">Parse Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-data">Visualize Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-relationships">Linear Relationships</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dissolved-oxygen-and-conductivity">Dissolved Oxygen and Conductivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alkalinity-and-conductivity">Alkalinity and Conductivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alkalinity-and-total-hardness">Alkalinity and Total Hardness</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Dissolved Oxygen and Conductivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Alkalinity and Conductivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Alkalinity and Total Hardness</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jill McNabay and Alexander Dowling
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
